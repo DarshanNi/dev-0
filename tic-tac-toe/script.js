@@ -5,6 +5,7 @@ let newGamebtn = document.querySelector('#new-btn')
 let msgContainer = document.querySelector('.msg-container')
 let msg = document.querySelector('#msg')
 let turn0 = true; // palyerx player0 
+let count = 0;
 
 
 const winPattern = [
@@ -28,6 +29,7 @@ boxes.forEach((box)=>{
             box.innerText = "X"
             turn0=true
         }
+    
         box.disabled=true;
 
         checkWinner();
@@ -70,7 +72,7 @@ const checkWinner = ()=>{
 }
 
 const showWinner = (winner)=>{
-    msg.innerText = `Congratulations, Winner is ${winner}`
+    msg.innerText = `Congratulations, Winner is '${winner}'.`
     msgContainer.classList.remove('hide')
     disableBoxes();
 }

@@ -31,7 +31,7 @@ body{
     border: none;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
     font-size: 8vmin;
-    color: rgba(181, 71, 3, 0.279);
+    color: #05f4a8;
 }
 
 #reset-btn{
@@ -57,7 +57,12 @@ body{
     font-size: 8vmin;
 }
 .msg-container{
-    margin-bottom: 30vmin;
+    height: 100vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
 }
 .hide{
     display: none;
