@@ -24,19 +24,21 @@ boxes.forEach((box)=>{
     box.addEventListener("click",()=>{
         if(turn0){
             box.innerText = "O"
+            box.classList.add("o");
             moves++;
             turn0=false
         }else{
             box.innerText = "X"
+            box.classList.add("x");
             moves++;
             turn0=true
         }
     
         box.disabled=true;
 
-        checkWinner();
-        
-        if(moves === 9){
+        let winner = checkWinner();
+
+        if(!winner && moves === 9){
             showDraw();
         }
     });
@@ -59,6 +61,7 @@ const enableBoxes = ()=>{
     for(let box of boxes){
         box.disabled=false;
         box.innerText = ""
+        box.classList.remove("o","x");
     }
 }
 
