@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bat ball & wicket</title>
+
+    <style>
+        body{
+            text-align: center;
+            background-color: aliceblue;
+            margin: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Bat Ball & Wicket Game</h1>
+
+    <button onclick="
+        let computerChoice = generateComputerChoice();
+        let result=generateResult('bat',computerChoice);
+        showResult('bat',computerChoice,result);
+    ">Bat</button>
+
+    <button onclick="
+        computerChoice = generateComputerChoice();
+        result = generateResult('ball',computerChoice);
+        showResult('ball',computerChoice,result);
+        ">Ball</button>
+
+    <button onclick="
+        computerChoice = generateComputerChoice();
+        result = generateResult('wicket',computerChoice);
+        showResult('wicket',computerChoice,result);
+        ">Wicket</button>
+
+        <h3 id="user-move"></h3>
+        <h3 id="computer-move"></h3>
+        <h3 id="result"></h3>
+        <h3 id="score"></h3>
+
+        <button  id="reset" onclick="localStorage.removeItem('score') 
+        resetScore();
+        updateScore();
+        ">Reset</button>
+
+   <script>
+    let scoreStr = localStorage.getItem('score');
+    let score;
+        resetScore(scoreStr);
+        function resetScore(scoreStr){
+                score = scoreStr ? JSON.parse(scoreStr) : {
+                user : 0,
+                computer : 0,
+                tie : 0,
+            };
+            score.displayScore = function(){
+                    return `Won : ${score.user}, Loss : ${score.computer}, Tie : ${score.tie}`
+                }
+        }
+        
+        function generateComputerChoice(){
+            let randomChoice = 3*(Math.random());
+            if(randomChoice>0 && randomChoice <=1){
+                return 'bat';
+            }else if(randomChoice >1 && randomChoice <=2){
+                return 'ball';
+            }else{
+                return 'wicket';
+            }
+        }
+
+        function generateResult(userMove, computerMove) {
+            if (computerMove === 'wicket' && userMove === 'bat') {
+                score.computer++;
+                return 'Computer Win!';
+            } else if (computerMove === 'ball' && userMove === 'bat') {
+                score.user++;
+                return 'User Win!';
+            } else if (computerMove === 'bat' && userMove === 'wicket') {
+                score.user++;
+                return 'User Win!';
+            } else if (computerMove === 'ball' && userMove === 'wicket'){  
+                score.computer++;
+                return 'Computer Win!';
+            } else if (computerMove === 'bat' && userMove === 'ball') {
+                score.computer++;
+                return 'Computer Win!';
+            } else if (computerMove === 'wicket' && userMove === 'ball') {
+                score.user++;
+                return 'User Win!';
+            } else {
+                score.tie++;
+                return 'Match Tie!';
+            }
+        }
+
+        function showResult(userMove,computerMove,result){
+
+            localStorage.setItem('score',JSON.stringify(score));
+            
+            // console.log(`You have choosen ${userMove}. Computer choice is ${computerMove}
+            
+            // ${result}.
+            
+            // ${score.displayScore()}`);
+
+            document.querySelector('#user-move').innerText = `You have choosen : ${userMove}`
+
+            document.querySelector('#computer-move').innerText = `Computer choice is : ${computerMove}`
+
+            document.querySelector('#result').innerText = `Result is : ${result}`
+           
+            updateScore();
+        }
+
+        const updateScore =()=>{
+            document.querySelector('#score').innerText = `Won : ${score.user}, Loss : ${score.computer}, Tie : ${score.tie}`
+        }
+   </script>
+</body>
+</html>
