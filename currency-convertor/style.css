@@ -25,6 +25,9 @@ body{
 form{
     margin: 2rem 0;
 }
+span{
+    margin-top: 1rem;
+}
 
 form select,button,input{
     width: 100%;
